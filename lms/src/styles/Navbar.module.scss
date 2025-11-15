@@ -1,0 +1,115 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 1px 30px rgb(255, 255, 255);
+  height:80px;
+  padding: 0 2rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.884); 
+  overflow: hidden;
+}
+
+.logo {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navButtons {
+  display: flex;
+  gap: 1rem;
+}
+.buttons{
+  font-weight: 500;
+  padding: 10px 25px;
+  border-radius: 20px;
+   background: rgba(255, 255, 255, 0.027);
+   color: white;
+   border: 1px solid white;
+   &:hover {
+    opacity: 0.9;
+    background: rgba(255, 255, 255, 0.37);
+    cursor: pointer;
+  }
+}
+.custom-placeholder::placeholder {
+  color: white;
+  opacity: 1;
+}
+.links{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.link{
+    color: white;
+    font-size: medium;
+    &:hover {
+        color: #c4c4c4;
+    }
+}
+.adminNav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  
+  margin-bottom: 16px;
+  
+}
+.adminSide{
+  display: flex;
+  justify-content: center;
+  color: #000000;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 25px 0px;
+  
+}
+.navCard{
+  height: auto;
+  width: 200px;
+}
+@media (max-width: 768px) {
+  .links {
+    display: none; // Hide navbar links in mobile view
+  }
+
+  .navButtons {
+    display: none; // Hide SignUp/Login buttons in mobile view
+  }
+
+  .mobileLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .link {
+      color: #000;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    button {
+      font-weight: 500;
+      color: #333;
+      background: none;
+      border: none;
+      padding: 10px 0;
+      text-align: left;
+
+      &:hover {
+        color: #0070f3;
+        cursor: pointer;
+      }
+    }
+  }
+}

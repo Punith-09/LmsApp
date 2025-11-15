@@ -1,0 +1,87 @@
+.layout {
+  background-color: #e7e7e7;
+  min-height: 100vh;
+}
+
+.content {
+  padding: 8rem 8%;
+  
+}
+
+.cartContainer {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.itemsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cartItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #fafafa;
+  border: 1px solid #eee;
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.thumbnail {
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.summaryBox {
+  margin-top: 2rem;
+  text-align: right;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;  
+}
+.checkoutButton{
+  padding: 15px 30px; 
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  
+}
+.checkoutButton:hover{
+   
+    background-color: #575757;
+  }
+.removeButton{
+  padding: 15px 30px; 
+  color: black;
+  border: 1px solid black;
+   cursor: pointer;
+   
+}
+.removeButton:hover{
+    border:1px solid #b8b8b8;
+   }

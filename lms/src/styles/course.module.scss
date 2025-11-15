@@ -1,0 +1,101 @@
+.mainContainer {
+    background-color: #e6e3e3;
+
+}
+
+.mainContent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;
+    margin-top: 20px;
+}
+
+.detailsCard {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    background-color: rgb(255, 255, 255);
+    height: 400px;
+    width: 85%;
+    border-radius: 8px;
+    margin-left: 8%;
+}
+
+.enrollButton {
+    width: 250px;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+.enrollButton:hover {
+    background-color: #303030;
+    color: #ffffff;
+    border: 1px solid black;
+}
+
+.cartButton {
+    width: 250px;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 1px solid rgb(192, 192, 192);
+    // color: black;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 20px;
+
+}
+
+.sidebar {
+    background: #f9f9f9;
+    padding: 1rem;
+
+    height: 100vh;
+    overflow-y: auto;
+
+    border-right: 1px solid #e0e0e0;
+}
+
+.vidContent {
+    padding: 2rem;
+    min-height: 100vh;
+
+}
+
+.courseContent {
+    border: 2px solid #c5c5c5;
+    padding: 40px 130px;
+}
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    height: 100%;
+}
+.certificate{
+    width: 250px;
+    background-color: #52c41a;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: auto;
+    border: none;
+    margin-left: 20px;
+}
+.certificate:hover{
+    background-color: #65e426;
+}

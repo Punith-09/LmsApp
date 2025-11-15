@@ -1,0 +1,30 @@
+.featureRow {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 7%;
+  margin-bottom: 7%;
+  
+
+}
+.featureCard {
+  border-radius: 12px;
+  background: #F3F6F9;
+  text-align: center;
+  padding: 10px 20px;
+  min-width: 200px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  .ant-card-body {
+    padding: 12px;
+  }
+  .icon {
+    font-size: 28px;
+    color: #003F5C;
+  }
+  .text {
+    margin-top: 8px;
+    font-weight: 500;
+    color: #003F5C;
+  }
+}

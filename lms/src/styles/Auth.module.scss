@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.logcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  gap: 20px;
+  min-height: 100vh;
+  background-color: #ffffff;
+  flex: 1; 
+}
+
+.logcontent {
+  width: 50%;
+  background-image: url('/loginbg1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  font-family:'Lucida Sans';
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  h3{
+    font-weight: 200
+  }
+}
+.regContent{
+  width: 50%;
+  background-image: url('/registerbg.png');
+  background-size:cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  font-family:'Lucida Sans';
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+ 
+}
+
+.card {
+  width: 400px;
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.card p {
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.link{
+  color: rgb(61, 61, 255);
+  text-decoration: underline;
+}
