@@ -17,13 +17,13 @@ export default function InstructorDraftsPage() {
   const isLoading = useStoreState((state: any) => state.loading.isLoading);
 
   const [courses, setCourses] = useState<any[]>([]);
-
+const getToken = () => (typeof window !== "undefined" ? localStorage.getItem("token") ?? "" : "");
   const fetchPendingCourses = async () => {
     setLoading(true);
     try {
       const res = await fetch("/api/admin/courses", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
       const data = await res.json();
@@ -51,7 +51,7 @@ export default function InstructorDraftsPage() {
       const res = await fetch(`/api/admin/courses/${id}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
       const data = await res.json();
