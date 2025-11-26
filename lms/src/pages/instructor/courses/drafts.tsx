@@ -160,3 +160,12 @@ const getToken = () => (typeof window !== "undefined" ? localStorage.getItem("to
     </DashboardLayout>
   );
 }
+
+/* =======================================
+   FIX FOR VERCEL BUILD
+   DISABLE SSG → FORCE SSR
+======================================= */
+export const getServerSideProps = async () => {
+  return { props: {} };
+};
+

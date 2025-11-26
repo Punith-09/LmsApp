@@ -17,7 +17,11 @@ export default function UsersPage() {
   const fetchStudents = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem("token");
+      // const token = localStorage.getItem("token");
+      let token: string | null = null;
+         if (typeof window !== "undefined") {
+        token = localStorage.getItem("token");
+      }
       if (!token) {
         message.error("Unauthorized! Please log in again.");
         router.push("/login");
@@ -54,7 +58,11 @@ export default function UsersPage() {
 const handleDelete = async (userId: string) => {
   setLoading(true);
   try {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
+     let token: string | null = null;
+      if (typeof window !== "undefined") {
+        token = localStorage.getItem("token");
+      }
     if (!token) {
       toast.error("Unauthorized! Please log in again.");
       router.push("/login");
@@ -107,3 +115,10 @@ const handleDelete = async (userId: string) => {
     </DashboardLayout>
   );
 }
+/* =======================================
+   FIX FOR VERCEL BUILD
+   DISABLE SSG → FORCE SSR
+======================================= */
+export const getServerSideProps = async () => {
+  return { props: {} };
+};

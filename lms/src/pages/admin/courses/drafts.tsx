@@ -48,3 +48,11 @@ export default function DraftCoursesPage() {
         </DashboardLayout>
   );
 }
+
+/* =======================================
+   FIX FOR VERCEL BUILD
+   DISABLE SSG → FORCE SSR
+======================================= */
+export const getServerSideProps = async () => {
+  return { props: {} };
+};
