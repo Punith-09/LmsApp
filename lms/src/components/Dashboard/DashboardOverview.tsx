@@ -29,9 +29,9 @@ export default function DashboardOverview({ user }: DashboardOverviewProps) {
   const [activeStudents, setActiveStudents] = useState<number>(0);
   const [activeInstructors, setActiveInstructors] = useState<number>(0);
   const fetchStudents=async ()=>{
-  const token = localStorage.getItem("token");
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
   const res = await fetch("/api/admin/users", {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${token ?? ""}` },
   });
   const data=await res.json()
   const students = data.filter((user: any) => user.role === "user");

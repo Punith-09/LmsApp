@@ -21,14 +21,24 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({sider,children,}: DashboardLayoutProps) {
-  const [collapsed, setCollapsed] = useState<boolean>(()=>{
-    const saved = localStorage.getItem("sidebarCollapsed");
-    return saved === "true";
-  });
-  const screens = useBreakpoint();
+  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [mounted, setMounted] = useState<boolean>(false);
+
   useEffect(() => {
-  localStorage.setItem("sidebarCollapsed", String(collapsed));
-}, [collapsed]);
+    setMounted(true);
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("sidebarCollapsed");
+      if (saved !== null) {
+        setCollapsed(saved === "true");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (mounted && typeof window !== "undefined") {
+      localStorage.setItem("sidebarCollapsed", String(collapsed));
+    }
+  }, [collapsed, mounted]);
 
   // useEffect(() => {
   //   if (!screens.md) {

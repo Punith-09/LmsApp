@@ -28,7 +28,9 @@ const cartCount = cartItems.length;
     setLoading(true);
     try {
       setUser(null);
-      localStorage.removeItem("token");
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("token");
+      }
       setTimeout(() => {
         router.push("/");
       }, 800);

@@ -53,8 +53,10 @@ const onSubmit = async (data: any) => {
     setUser(json.user);
     console.log("User from login response:", json.user);
 
-    localStorage.setItem("user", JSON.stringify(json.user));
-    localStorage.setItem("token", json.token);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user", JSON.stringify(json.user));
+      localStorage.setItem("token", json.token);
+    }
 
    
 

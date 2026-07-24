@@ -53,7 +53,9 @@ export default function SignUp() {
 
 
       setUser(json.user); 
-      localStorage.setItem("user", JSON.stringify(json.user));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("user", JSON.stringify(json.user));
+      }
 
       toast.success('Registered successfully');
        router.push("/");
