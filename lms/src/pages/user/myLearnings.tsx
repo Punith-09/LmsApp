@@ -95,10 +95,14 @@ export default function MyLearnings() {
                 cover={
                   <img
                     alt={course.title}
-                    src={course.thumbnail}
+                    src={course.thumbnail || "/home1.jpg"}
+                    onError={(e: any) => {
+                      e.target.onerror = null;
+                      e.target.src = "/home1.jpg";
+                    }}
                     style={{
                       height: 200,
-                      objectFit: "fill",
+                      objectFit: "cover",
                       borderRadius: "8px 8px 0 0",
                     }}
                   />

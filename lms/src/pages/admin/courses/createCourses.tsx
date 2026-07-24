@@ -419,6 +419,10 @@ export default function CreateCourse() {
   };
 
   const handleFileUpload = async (file: File, type: "thumbnail" | "introVideo" | "lessonVideo") => {
+    if (file.size > 4.5 * 1024 * 1024) {
+      toast.info("Note: Large files (>4.5MB) may exceed Vercel's serverless request body limit. Direct URL input is also available below.");
+    }
+
     const formData = new FormData();
     formData.append(type, file);
 
@@ -428,15 +432,23 @@ export default function CreateCourse() {
         method: "POST",
         body: formData,
       });
+
+      if (res.status === 413) {
+        toast.error("File exceeds Vercel's 4.5MB request limit. Please paste a direct media URL instead.");
+        return null;
+      }
+
       const data = await res.json();
-      if (res.ok) return data.files[0].path;
-      else {
+      if (res.ok && data.files?.[0]?.path) {
+        toast.success("File uploaded successfully!");
+        return data.files[0].path;
+      } else {
         toast.error(data.message || "Upload failed");
         return null;
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      toast.error("Error uploading file");
+      toast.error("Error uploading file. Try pasting a direct URL.");
       return null;
     } finally {
       setLoading(false);
@@ -445,7 +457,7 @@ export default function CreateCourse() {
 
   const onFinish = async (values: any) => {
     if (!thumbnail || !introVideo) {
-      message.warning("Please upload thumbnail and intro video");
+      message.warning("Please upload or provide URL for thumbnail and intro video");
       return;
     }
 
@@ -537,31 +549,49 @@ export default function CreateCourse() {
             </Select>
           </Form.Item>
 
-          <Form.Item label="Thumbnail" required>
-            <Upload
-              beforeUpload={(file) => {
-                handleFileUpload(file, "thumbnail").then((path) => path && setThumbnail(path));
-                return false;
-              }}
-              showUploadList={false}
-            >
-              <Button icon={<UploadOutlined />}>Upload Thumbnail</Button>
-            </Upload>
-            {thumbnail && <img src={thumbnail} alt="thumb" style={{ width: 200, marginTop: 10 }} />}
+          <Form.Item label="Thumbnail Image" required>
+            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <Upload
+                beforeUpload={(file) => {
+                  handleFileUpload(file, "thumbnail").then((path) => path && setThumbnail(path));
+                  return false;
+                }}
+                showUploadList={false}
+              >
+                <Button icon={<UploadOutlined />}>Upload Thumbnail File</Button>
+              </Upload>
+              <span>or</span>
+              <Input
+                placeholder="Or paste Thumbnail Image URL (HTTPS)"
+                value={thumbnail}
+                onChange={(e) => setThumbnail(e.target.value)}
+                style={{ flex: 1 }}
+              />
+            </div>
+            {thumbnail && <img src={thumbnail} alt="thumb" style={{ width: 200, marginTop: 10, borderRadius: 4 }} />}
           </Form.Item>
 
           <Form.Item label="Intro Video" required>
-            <Upload
-              beforeUpload={(file) => {
-                handleFileUpload(file, "introVideo").then((path) => path && setIntroVideo(path));
-                return false;
-              }}
-              showUploadList={false}
-            >
-              <Button icon={<UploadOutlined />}>Upload Intro Video</Button>
-            </Upload>
+            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <Upload
+                beforeUpload={(file) => {
+                  handleFileUpload(file, "introVideo").then((path) => path && setIntroVideo(path));
+                  return false;
+                }}
+                showUploadList={false}
+              >
+                <Button icon={<UploadOutlined />}>Upload Intro Video File</Button>
+              </Upload>
+              <span>or</span>
+              <Input
+                placeholder="Or paste Intro Video URL (HTTPS / Cloudinary / MP4)"
+                value={introVideo}
+                onChange={(e) => setIntroVideo(e.target.value)}
+                style={{ flex: 1 }}
+              />
+            </div>
             {introVideo && (
-              <video width="300" controls style={{ marginTop: 10 }}>
+              <video width="300" controls style={{ marginTop: 10, borderRadius: 4 }}>
                 <source src={introVideo} />
               </video>
             )}
@@ -638,30 +668,30 @@ export default function CreateCourse() {
                                 <Input placeholder="Lesson title" />
                               </Form.Item>
 
-                              <Form.Item label="Lesson Video" required>
-                                <Upload
-                                  beforeUpload={(file) => {
-                                    handleFileUpload(file, "lessonVideo").then((path) => {
-                                      if (path) {
-                                        const currentSections = form.getFieldValue("sections");
-                                        currentSections[secField.name].lessons[lessonField.name].videoUrl = path;
-                                        form.setFieldsValue({ sections: currentSections });
-                                      }
-                                    });
-                                    return false;
-                                  }}
-                                  showUploadList={false}
-                                >
-                                  <Button icon={<UploadOutlined />}>Upload Video</Button>
-                                </Upload>
-                              </Form.Item>
-
                               <Form.Item
                                 name={[lessonField.name, "videoUrl"]}
-                                hidden
+                                label="Lesson Video (Upload or URL)"
                                 rules={[{ required: true, message: "Lesson video is required" }]}
                               >
-                                <Input type="hidden" />
+                                <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                                  <Upload
+                                    beforeUpload={(file) => {
+                                      handleFileUpload(file, "lessonVideo").then((path) => {
+                                        if (path) {
+                                          const currentSections = form.getFieldValue("sections");
+                                          currentSections[secField.name].lessons[lessonField.name].videoUrl = path;
+                                          form.setFieldsValue({ sections: currentSections });
+                                        }
+                                      });
+                                      return false;
+                                    }}
+                                    showUploadList={false}
+                                  >
+                                    <Button icon={<UploadOutlined />}>Upload File</Button>
+                                  </Upload>
+                                  <span>or</span>
+                                  <Input placeholder="Paste Lesson Video URL (HTTPS / Cloudinary / MP4)" />
+                                </div>
                               </Form.Item>
                             </Card>
                           ))}
