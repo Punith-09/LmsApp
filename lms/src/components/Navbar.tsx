@@ -88,7 +88,7 @@ const cartCount = cartItems.length;
       )}
     </>
   );
-console.log("hello");
+
   return (
     <>
       {isAdminType ? (
